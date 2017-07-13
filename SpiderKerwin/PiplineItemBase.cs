@@ -9,5 +9,11 @@ namespace Xuhengxiao.SpiderKerwin
     /// </summary>
     public  class PiplineItemBase
     {
+        /// <summary>
+        /// 处理数据的方法。
+        /// </summary>
+        public virtual void deal()
+        {
+        }
     }
 }

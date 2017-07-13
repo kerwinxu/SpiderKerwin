@@ -15,6 +15,7 @@ namespace Xuhengxiao.SpiderKerwin
         /// </summary>
         public SchedulerBase Scheduler { get; set; }
 
+
         /// <summary>
         /// 无非是调用调度器的add方法。
         /// </summary>
@@ -50,7 +51,8 @@ namespace Xuhengxiao.SpiderKerwin
             }
 
             var doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(str_html);
+            
+            doc.LoadHtml(str_html);
             return doc.DocumentNode.SelectNodes(str_xpath);
             
         }

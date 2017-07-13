@@ -43,13 +43,14 @@ namespace Xuhengxiao.SpiderKerwin
 
 
         /// <summary>
-        /// 访问一个网址
+        /// 访问一个网址,这个方法可以倍继承。
         /// </summary>
         /// <param name="res"></param>
-        public void Start(Response res)
+        virtual public void Start(Response res)
         {
             _response = res;//先保存这个信息，等下载完毕的时候，需要填充html的，然后调用OnDocumentComplete发送事件
             //throw new System.NotImplementedException();
+            
         }
     }
 

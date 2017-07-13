@@ -41,7 +41,7 @@ namespace Xuhengxiao.SpiderKerwin
         /// 增加一个网址。
         /// </summary>
         /// <param name="res"></param>
-        public void add(Response res)
+        virtual  public void add(Response res)
         {
             if (lst_Response == null)
             {
@@ -117,7 +117,15 @@ namespace Xuhengxiao.SpiderKerwin
         private  void DocumentComplete(Object sender, DocumentCompleteEventArgs e)
         {
             //进行下一页，并且调用解析吧。
-            e.RESPONSE.Parse(e.HTML);//先解析
+            List< PiplineItemBase> pipitem = e.RESPONSE.Parse(e.HTML);//先解析,得到数据，
+            if (pipitem != null)//如果数据不为空
+            {
+                foreach (var item in pipitem)
+                {
+                    item.deal();//就处理数据。
+                }
+ 
+            }
             next();//然后下一个网址
 
         }
