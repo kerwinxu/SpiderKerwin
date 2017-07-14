@@ -17,17 +17,17 @@ namespace SpiderDemo
             add("http://news.163.com/", parse);
         }
 
-        public List<PiplineItemBase> parse(string str_html)
+        public void   parse(string str_html)
         {
-            List<PiplineItemBase> list_return = new List<PiplineItemBase>();
+           
             var links = SelectNodes(str_html, "//a");
             foreach (var item in links)
             {
                 PiplineItem163NewsLinks p = new PiplineItem163NewsLinks();
                 p.Link = item.GetAttributeValue("href",string.Empty);
-                list_return.Add(p);
+                sendItem(p);
             }
-            return list_return;
+            
 
         }
     }

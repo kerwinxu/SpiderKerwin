@@ -9,7 +9,7 @@ namespace Xuhengxiao.SpiderKerwin
     /// 定义一个解析的委托，
     /// </summary>
     /// <param name="res"></param>
-    public delegate List<PiplineItemBase> ParseEventHandler(string str_html);
+    public delegate void ParseEventHandler(string str_html);
 
     /// <summary>
     /// 这个类作为传输数据用，包含url，parse方法(委托)，和xpath方法

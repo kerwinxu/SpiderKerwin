@@ -30,6 +30,16 @@ namespace Xuhengxiao.SpiderKerwin
             Scheduler.add(res);
         }
 
+        /// <summary>
+        /// 发送item信息，这个无非是调用处理方法
+        /// </summary>
+        /// <param name="item"></param>
+        public void sendItem(PiplineItemBase item)
+        {
+            item.deal();
+        }
+
+
         #region
         //解析方法编写，委托是这个，public delegate void ParseEventHandler(Response res);
         //从这个基类继承的子类中实现这个委托。

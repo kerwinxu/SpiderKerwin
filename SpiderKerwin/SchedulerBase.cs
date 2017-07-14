@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+
 
 namespace Xuhengxiao.SpiderKerwin
 {
@@ -9,7 +11,10 @@ namespace Xuhengxiao.SpiderKerwin
     /// </summary>
     public class SchedulerBase
     {
-
+        /// <summary>
+        /// 休眠时间，下载不是每个立即下载的，而是有间隔的。
+        /// </summary>
+        public int SleepCount=5000;
 
         /// <summary>
         /// 下载器的，单线程版本的。
@@ -104,8 +109,24 @@ namespace Xuhengxiao.SpiderKerwin
                 return;
             }
             res.isParse = true;//设置已经被爬
+            SleepThread();//休息一段时间。
             _downloader.Start(res);//让下载器去下载
             isRunning = true;//设置状态的。
+        }
+
+        /// <summary>
+        /// 暂停多少时间
+        /// </summary>
+        public virtual void SleepThread()
+        {
+            if (SleepCount!=0)
+            {
+                Random ran = new Random();
+                int RandKey = ran.Next(SleepCount/2, SleepCount);
+                Thread.Sleep(RandKey);
+
+            }
+
         }
 
 
@@ -117,15 +138,8 @@ namespace Xuhengxiao.SpiderKerwin
         private  void DocumentComplete(Object sender, DocumentCompleteEventArgs e)
         {
             //进行下一页，并且调用解析吧。
-            List< PiplineItemBase> pipitem = e.RESPONSE.Parse(e.HTML);//先解析,得到数据，
-            if (pipitem != null)//如果数据不为空
-            {
-                foreach (var item in pipitem)
-                {
-                    item.deal();//就处理数据。
-                }
- 
-            }
+            e.RESPONSE.Parse(e.HTML);//先解析,得到数据，
+
             next();//然后下一个网址
 
         }
